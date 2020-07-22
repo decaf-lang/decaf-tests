@@ -40,6 +40,7 @@ check_output(){
         diff -qZ output/$T.output expected/$T.result && NPASS=$((NPASS+1))
     done
     echo "Pass/Total: ${NPASS}/${NTOT}"
+    exit `[ $NPASS = $NTOT ]`
 }
 
 
@@ -48,4 +49,3 @@ cd $DIR
 prepare
 parallel --halt now,fail=1 run_test ::: ${TESTS[@]}
 check_output
-cd ..
